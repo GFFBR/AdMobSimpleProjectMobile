@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">Unlock QNetwing</string>
     
-    <string name="admob_banner_header_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="admob_banner_footer_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="admob_interstitial_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="admob_banner_header_id">ca-app-pub-8974711139428606/9589430385</string>
+    <string name="admob_banner_footer_id">ca-app-pub-8974711139428606/1399949171</string>
+    <string name="admob_interstitial_id">ca-app-pub-8974711139428606/7881597044</string>
 </resources>
 
