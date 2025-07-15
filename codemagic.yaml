@@ -1,0 +1,38 @@
+# codemagic.yaml (VERSÃO 5 - CORREÇÃO DO BUILD)
+workflows:
+  android-build:
+    name: Android Build
+    
+    environment:
+      groups:
+        - admob_credentials
+
+    scripts:
+      - name: Set up local.properties
+        script: |
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/local.properties"
+      - name: Replace AdMob App ID in AndroidManifest
+        script: |
+          MANIFEST_PATH="./app/src/main/AndroidManifest.xml"
+          if [ -z "$ADMOB_APP_ID" ]; then
+            echo "Erro: A variável de ambiente ADMOB_APP_ID não foi definida."
+            exit 1
+          fi
+          sed -i.bak "s/ADMOB_APP_ID_PLACEHOLDER/$ADMOB_APP_ID/g" $MANIFEST_PATH
+          echo "AndroidManifest.xml atualizado com o ID do AdMob."
+      - name: Build Android release
+        script: |
+          # --- MUDANÇA AQUI ---
+          # Trocamos './gradlew' por 'gradle' para usar o comando global da máquina.
+          gradle assembleRelease
+
+    artifacts:
+      - app/build/outputs/apk/release/*.apk
+
+    publishing:
+      email:
+        recipients:
+          - seu-email@exemplo.com # Substitua pelo seu email
+        notify:
+          success: true
+          failure: false
